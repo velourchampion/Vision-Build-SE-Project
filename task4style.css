@@ -1,0 +1,109 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+.top-strip {
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+
+.top-strip button {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border-radius: 0; 
+    cursor: pointer;
+}
+
+
+.nav-bar {
+    background-color: orange;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+
+.large-image {
+    width: 100%;
+    max-height: calc(100vh - 260px); 
+    overflow: hidden; 
+}
+
+.large-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; 
+}
+
+
+.black-section {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+
+.images-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.images-container img {
+    max-width: 40%; 
+    height: auto;
+    margin: 10px 0;
+}
+
+
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+.button {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.orange-button {
+    background-color: orange;
+    color: white;
+}
+
+.grey-button {
+    background-color: grey;
+    color: white;
+}
+
+.black-button {
+    background-color: black;
+    color: white;
+}
+
