@@ -1,0 +1,357 @@
+<html>
+ <head>
+  <title>
+   Kitchen Renovation - Tasks
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            border-right: 1px solid #e0e0e0;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .sidebar .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .sidebar .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .sidebar .logo span {
+            font-size: 20px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .sidebar .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar .menu li {
+            margin-bottom: 20px;
+        }
+        .sidebar .menu li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .sidebar .menu li a i {
+            margin-right: 10px;
+        }
+        .sidebar .menu li a.active {
+            color: #4a90e2;
+            font-weight: 500;
+        }
+        .sidebar .menu li a:hover {
+            background-color: #f1f1f1;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .content .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .content .header .search-filter {
+            display: flex;
+            align-items: center;
+        }
+        .content .header .search {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+        }
+        .content .header .search input {
+            border: none;
+            outline: none;
+            margin-left: 10px;
+        }
+        .content .header .filter {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+            margin-left: 10px;
+        }
+        .content .header .filter select {
+            border: none;
+            outline: none;
+            margin-left: 10px;
+            background: none;
+        }
+        .content .header .icons {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .content .header .icons i {
+            margin-left: 20px;
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+        }
+        .content .header .icons .notification-popup {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 200px;
+        }
+        .content .header .icons .notification-popup p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+        .content h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .task-list {
+            display: flex;
+            justify-content: space-between;
+        }
+        .task-category {
+            width: 30%;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .task-category h3 {
+            margin: 0 0 10px 0;
+            font-size: 20px;
+        }
+        .task {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .task h4 {
+            margin: 0;
+            font-size: 16px;
+        }
+        .task p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        .add-task-btn {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .add-member-btn, .set-due-date-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .calendar-popup {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 200px;
+        }
+        .calendar-popup input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+            .task-list {
+                flex-direction: column;
+            }
+            .task-category {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+  </style>
+  <script>
+   document.addEventListener('DOMContentLoaded', function() {
+            const bellIcon = document.querySelector('.icons i');
+            const notificationPopup = document.querySelector('.notification-popup');
+            const profile = document.querySelector('.profile');
+            const profilePopup = document.querySelector('.profile-popup');
+            const closeBtn = document.querySelector('.profile-popup .close-btn i');
+
+            bellIcon.addEventListener('click', function() {
+                notificationPopup.style.display = notificationPopup.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!bellIcon.contains(event.target) && !notificationPopup.contains(event.target)) {
+                    notificationPopup.style.display = 'none';
+                }
+            });
+
+            profile.addEventListener('click', function() {
+                profilePopup.style.display = 'block';
+            });
+
+            closeBtn.addEventListener('click', function() {
+                profilePopup.style.display = 'none';
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!profile.contains(event.target) && !profilePopup.contains(event.target)) {
+                    profilePopup.style.display = 'none';
+                }
+            });
+        });
+  </script>
+ </head>
+ <body>
+  <div class="container">
+   <div class="sidebar">
+    <div class="logo">
+     <img alt="Logo" height="40" src="https://storage.googleapis.com/a1aa/image/iqGYeecQudkmFEPrPvWPP3Vave1KwaKuiQPhBjIbI7rbcaDoA.jpg" width="40"/>
+     <span>
+      Vision Build
+     </span>
+    </div>
+    <ul class="menu">
+     <li>
+      <a href="Vision Build Home.html">
+       <i class="fas fa-home"></i>
+       Home
+      </a>
+     </li>
+     <li>
+      <a class="active" href="Vision Build Projects.html">
+       <i class="fas fa-folder"></i>
+       Projects
+      </a>
+     </li>
+     <li>
+      <a href="#">
+       <i class="fas fa-users"></i>
+       Collaboration
+      </a>
+     </li>
+    </ul>
+   </div>
+   <div class="content">
+    <div class="header">
+     <div class="search-filter">
+      <div class="search">
+       <i class="fas fa-search"></i>
+       <input placeholder="Search ..." type="text"/>
+      </div>
+      <div class="filter">
+       <i class="fas fa-filter"></i>
+       <select>
+        <option value="date">Date</option>
+        <option value="users">Users</option>
+       </select>
+      </div>
+     </div>
+     <div class="icons">
+      <i class="fas fa-bell"></i>
+      <div class="notification-popup">
+       <p>No new notifications</p>
+      </div>
+     </div>
+    </div>
+    <h2 style="margin-top: 20px;">Kitchen Renovation - Tasks</h2>
+    <div class="task-list" style="margin-top: 20px;">
+     <div class="task-category">
+      <h3>To Do</h3>
+      <div class="task">
+       <h4>Paint the walls</h4>
+       <p>Due Date: <input type="text" placeholder="Select Date" readonly /></p>
+       <p>Assigned: John, Emma</p>
+      </div>
+      <div class="task">
+       <h4>Buy furniture</h4>
+       <p>Due Date: <input type="text" placeholder="Select Date" readonly /></p>
+       <p>Assigned: Alex</p>
+      </div>
+     </div>
+     <div class="task-category">
+      <h3>In Progress</h3>
+      <div class="task">
+       <h4>Install lighting</h4>
+       <p>Due Date: <input type="text" placeholder="Select Date" readonly /></p>
+       <p>Assigned: Sarah</p>
+      </div>
+     </div>
+     <div class="task-category">
+      <h3>Finished</h3>
+      <div class="task">
+       <h4>Remove old carpet</h4>
+       <p>Due Date: <input type="text" placeholder="Select Date" readonly /></p>
+       <p>Assigned: Mike, Lucy</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="profile-popup">
+   <div class="close-btn">
+    <i class="fas fa-times"></i>
+   </div>
+   <div class="profile-info">
+    <img alt="Profile Picture" height="80" src="https://storage.googleapis.com/a1aa/image/2lb1h4QqZVJuJlTeO2SG0sgJePXffVrccFxHQxu2v4JexpNgC.jpg" width="80"/>
+    <h3>Amanda</h3>
+    <p>Email: amanda@example.com</p>
+    <p>Role: Project Manager</p>
+    <p>Joined: January 2021</p>
+   </div>
+  </div>
+ </body>
+</html>

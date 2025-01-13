@@ -1,0 +1,534 @@
+<html>
+ <head>
+  <title>
+   Vision Build
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            border-right: 1px solid #e0e0e0;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .sidebar .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .sidebar .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .sidebar .logo span {
+            font-size: 20px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .sidebar .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar .menu li {
+            margin-bottom: 20px;
+        }
+        .sidebar .menu li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .sidebar .menu li a i {
+            margin-right: 10px;
+        }
+        .sidebar .menu li a.active {
+            color: #4a90e2;
+            font-weight: 500;
+        }
+        .sidebar .menu li a:hover {
+            background-color: #f1f1f1;
+        }
+        .sidebar .profile {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .sidebar .profile:hover {
+            background-color: #f1f1f1;
+        }
+        .sidebar .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .sidebar .profile span {
+            font-size: 14px;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .content .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .content .header .search-filter {
+            display: flex;
+            align-items: center;
+        }
+        .content .header .search {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+        }
+        .content .header .search input {
+            border: none;
+            outline: none;
+            margin-left: 10px;
+        }
+        .content .header .filter {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+            margin-left: 10px;
+        }
+        .content .header .filter select {
+            border: none;
+            outline: none;
+            margin-left: 10px;
+            background: none;
+        }
+        .content .header .icons {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .content .header .icons i {
+            margin-left: 20px;
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+        }
+        .content .header .icons .notification-popup {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 200px;
+        }
+        .content .header .icons .notification-popup p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+        .content .projects {
+            margin-top: 20px;
+        }
+        .content .projects h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .content .projects .project-list {
+            display: flex;
+            gap: 20px;
+        }
+        .content .projects .project {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            box-sizing: border-box;
+            transition: background-color 0.3s;
+        }
+        .content .projects .project:hover {
+            background-color: #f1f1f1;
+        }
+        .content .projects .project img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .content .projects .project h3 {
+            font-size: 18px;
+            margin: 0 0 10px 0;
+        }
+        .content .projects .project p {
+            font-size: 14px;
+            color: #666;
+            margin: 0;
+        }
+        .content .projects .project .team {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .content .projects .project .team span {
+            margin-right: 10px;
+            align-self: flex-start;
+        }
+        .content .projects .project .team img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .content .projects .project .team .member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 10px;
+        }
+        .content .projects .project .team .member p {
+            margin: 0;
+            font-size: 12px;
+            text-align: center;
+        }
+        .profile-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            z-index: 1000;
+        }
+        .profile-popup .close-btn {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .profile-popup .close-btn i {
+            cursor: pointer;
+        }
+        .profile-popup .profile-info {
+            text-align: center;
+        }
+        .profile-popup .profile-info img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .profile-popup .profile-info h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+        .profile-popup .profile-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+            .content .projects .project-list {
+                flex-direction: column;
+            }
+            .content .projects .project {
+                width: 100%;
+            }
+        }
+  </style>
+  <script>
+   document.addEventListener('DOMContentLoaded', function() {
+            const bellIcon = document.querySelector('.icons i');
+            const notificationPopup = document.querySelector('.notification-popup');
+            const profile = document.querySelector('.profile');
+            const profilePopup = document.querySelector('.profile-popup');
+            const closeBtn = document.querySelector('.profile-popup .close-btn i');
+
+            bellIcon.addEventListener('click', function() {
+                notificationPopup.style.display = notificationPopup.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!bellIcon.contains(event.target) && !notificationPopup.contains(event.target)) {
+                    notificationPopup.style.display = 'none';
+                }
+            });
+
+            profile.addEventListener('click', function() {
+                profilePopup.style.display = 'block';
+            });
+
+            closeBtn.addEventListener('click', function() {
+                profilePopup.style.display = 'none';
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!profile.contains(event.target) && !profilePopup.contains(event.target)) {
+                    profilePopup.style.display = 'none';
+                }
+            });
+        });
+  </script>
+ </head>
+ <body>
+  <div class="container">
+   <div class="sidebar">
+    <div class="logo">
+     <img alt="Logo" height="40" src="https://storage.googleapis.com/a1aa/image/iqGYeecQudkmFEPrPvWPP3Vave1KwaKuiQPhBjIbI7rbcaDoA.jpg" width="40"/>
+     <span>
+      Vision Build
+     </span>
+    </div>
+    <ul class="menu">
+     <li>
+      <a class="active" href="Vision Build Home.html">
+       <i class="fas fa-home">
+       </i>
+       Home
+      </a>
+     </li>
+     <li>
+      <a href="Vision Build Projects.html">
+       <i class="fas fa-folder">
+       </i>
+       Projects
+      </a>
+     </li>
+     <li>
+      <a href="Vision Build Living Room Renovation Tasks.html">
+       <i class="fas fa-door-open"></i>
+       Living Room Renovation Tasks
+      </a>
+     </li>
+     <li>
+      <a href="Vision Build Kitchen Renovation Tasks.html">
+       <i class="fas fa-door-open"></i>
+       Kitchen Renovation Tasks
+      </a>
+     </li>
+     <li>
+      <a href="Vision Build Drawing Room Renovation Tasks.html">
+       <i class="fas fa-door-open"></i>
+       Drawing Room Renovation Tasks
+      </a>
+     </li>
+     <li>
+      <a href="#">
+       <i class="fas fa-users"></i>
+       Collaboration
+      </a>
+     </li>
+    </ul>
+    <div class="profile">
+     <img alt="Profile Picture" height="40" src="https://storage.googleapis.com/a1aa/image/2lb1h4QqZVJuJlTeO2SG0sgJePXffVrccFxHQxu2v4JexpNgC.jpg" width="40"/>
+     <span>
+      Amanda
+      <br/>
+      <small>
+       View profile
+      </small>
+     </span>
+    </div>
+   </div>
+   <div class="content">
+    <div class="header">
+     <div class="search-filter">
+      <div class="search">
+       <i class="fas fa-search">
+       </i>
+       <input placeholder="Search ..." type="text"/>
+      </div>
+      <div class="filter">
+       <i class="fas fa-filter">
+       </i>
+       <select>
+        <option value="date">
+         Date
+        </option>
+        <option value="users">
+         Users
+        </option>
+       </select>
+      </div>
+     </div>
+     <div class="icons">
+      <i class="fas fa-bell">
+      </i>
+      <div class="notification-popup">
+       <p>
+        No new notifications
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="projects">
+     <h2>
+      Recent Projects
+     </h2>
+     <div class="project-list">
+      <div class="project">
+       <a href="Vision Build Living Room Renovation Tasks.html">
+       <img alt="Living Room Renovation" height="200" src="https://storage.googleapis.com/a1aa/image/SncfaxjMlwRCMiSh2DrcoVnAIOUpae00LY5gMrk949dSOtBUA.jpg" width="300"/>
+       <h3>
+        Living Room Renovation
+       </h3>
+       <p>
+        Last edited: Oct 3, 2023
+       </p>
+       </a>
+       <div class="team">
+        <span>
+         Team:
+        </span>
+        <div class="member">
+         <img alt="John's Profile Picture" height="20" src="https://storage.googleapis.com/a1aa/image/IfHdIYVCFUQbFafxFD1LxSTyHlLrSbs7FCtIkMzFC34hktBUA.jpg" title="John" width="20"/>
+         <p>
+          John
+         </p>
+        </div>
+        <div class="member">
+         <img alt="Emma's Profile Picture" height="20" src="https://storage.googleapis.com/a1aa/image/qaiQLeCrenp190HrmHLfUHMJzOfxfNrTQOloOKcAU7iulsNgC.jpg" title="Emma" width="20"/>
+         <p>
+          Emma
+         </p>
+        </div>
+        <div class="member">
+         <img alt="Alex's Profile Picture" height="20" src="https://storage.googleapis.com/a1aa/image/M37fpHfSWQi21EflrBg6e64QOfvXCfeBzHrZo2rZpJDNVy2AKA.jpg" title="Alex" width="20"/>
+         <p>
+          Alex
+         </p>
+        </div>
+       </div>
+      </div>
+      <div class="project">
+       <a href="Vision Build Kitchen Renovation Tasks.html">
+       <img alt="Kitchen Renovations" height="200" src="https://storage.googleapis.com/a1aa/image/M0BUEdEkYB7SIR9i8FLm343KacOyZ3TvQedBFVqRepcUOtBUA.jpg" width="300"/>
+       <h3>
+        Kitchen Renovations
+       </h3>
+       <p>
+        Last edited: Sep 28, 2023
+       </p>
+       </a>
+       <div class="team">
+        <span>
+         Team:
+        </span>
+        <div class="member">
+         <img alt="Sarah's Profile Picture" height="20" src="https://storage.googleapis.com/a1aa/image/xTKJVteozegJLExq5pquIme0IiJzlTi2QvDjJIBbUKHWJbDoA.jpg" title="Sarah" width="20"/>
+         <p>
+          Sarah
+         </p>
+        </div>
+        <div class="member">
+         <img alt="Mike's Profile Picture" height="20" src="https://storage.googleapis.com/a1aa/image/MggfTzHhVT1bIaSWANehSGnbi9FwcJr5aPRKMeMf840TS2GQB.jpg" title="Mike" width="20"/>
+         <p>
+          Mike
+         </p>
+        </div>
+        <div class="member">
+         <img alt="Lucy's Profile Picture" height="20" src="https://storage.googleapis.com/a1aa/image/v5GaX0rur3rJHhkBI3XLKyijku5lAHY6KOE7PKFPCspJZbAF.jpg" title="Lucy" width="20"/>
+         <p>
+          Lucy
+         </p>
+        </div>
+       </div>
+      </div>
+      <div class="project">
+       <a href="Vision Build Drawing Room Renovation Tasks.html">
+       <img alt="Drawing Room Renovation" height="200" src="https://storage.googleapis.com/a1aa/image/1mq3LkztQe1fuUZUqNu0t6zotYmJhXuwSQvcgPDL5z6ROtBUA.jpg" width="300"/>
+       <h3>
+        Drawing Room Renovation
+       </h3>
+       <p>
+        Last edited: Oct 5, 2023
+       </p>
+       </a>
+       <div class="team">
+        <span>
+         Team:
+        </span>
+        <div class="member">
+         <img alt="David's Profile Picture" height="20" src="https://storage.googleapis.com/a1aa/image/FGMin3AUXjIkGxGJfjMah4ltaxwbJWIeVabFKwH2ZnLfIbDoA.jpg" title="David" width="20"/>
+         <p>
+          David
+         </p>
+        </div>
+        <div class="member">
+         <img alt="Rachel's Profile Picture" height="20" src="https://storage.googleapis.com/a1aa/image/EBfEA9Xd001oHStlT9ObwEc8rfC5avdL5N6CZkyiigaiktBUA.jpg" title="Rachel" width="20"/>
+         <p>
+          Rachel
+         </p>
+        </div>
+        <div class="member">
+         <img alt="Ben's Profile Picture" height="20" src="https://storage.googleapis.com/a1aa/image/71OmZaGvjpIJFZfvGmIW4wsEirwkOV46uUjVPwMg1sKUy2AKA.jpg" title="Ben" width="20"/>
+         <p>
+          Ben
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="profile-popup">
+   <div class="close-btn">
+    <i class="fas fa-times">
+    </i>
+   </div>
+   <div class="profile-info">
+    <img alt="Profile Picture" height="80" src="https://storage.googleapis.com/a1aa/image/2lb1h4QqZVJuJlTeO2SG0sgJePXffVrccFxHQxu2v4JexpNgC.jpg" width="80"/>
+    <h3>
+     Amanda
+    </h3>
+    <p>
+     Email: amanda@example.com
+    </p>
+    <p>
+     Role: Project Manager
+    </p>
+    <p>
+     Joined: January 2021
+    </p>
+   </div>
+  </div>
+ </body>
+</html>

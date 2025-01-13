@@ -1,0 +1,395 @@
+<html>
+ <head>
+  <title>
+   Collaboration Platform
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-right: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        .sidebar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .sidebar .logo {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+        .sidebar .logo img {
+            margin-right: 10px;
+        }
+        .sidebar .menu {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar .menu li {
+            padding: 10px 20px;
+        }
+        .sidebar .menu li a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar .menu li a i {
+            margin-right: 10px;
+        }
+        .sidebar .profile {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar .profile img {
+            margin-right: 10px;
+        }
+        .sidebar .profile .name {
+            font-weight: 500;
+        }
+        .sidebar .profile .view-profile {
+            font-size: 12px;
+            color: #888;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .main-content .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .main-content .header .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+        }
+        .main-content .header .search-bar input {
+            border: none;
+            outline: none;
+            padding: 5px;
+        }
+        .main-content .header .search-bar i {
+            margin-left: 10px;
+            color: #888;
+        }
+        .main-content .header .filter {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            margin-left: 10px;
+        }
+        .main-content .header .filter select {
+            border: none;
+            outline: none;
+            padding: 5px;
+        }
+        .main-content .header .filter i {
+            margin-left: 10px;
+            color: #888;
+        }
+        .main-content .header .notification {
+            color: #333;
+            font-size: 20px;
+            margin-left: 20px;
+        }
+        .main-content .title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .main-content .cards {
+            display: flex;
+            gap: 20px;
+        }
+        .main-content .card {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+        }
+        .main-content .card img {
+            width: 100%;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+        .main-content .card .title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #6a1b9a;
+            margin-bottom: 10px;
+        }
+        .main-content .card .date {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        .main-content .card .team {
+            display: flex;
+            align-items: center;
+        }
+        .main-content .card .team img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .main-content .card .team .name {
+            font-size: 14px;
+            color: #333;
+            margin-right: 10px;
+        }
+        .main-content .join-button {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        .main-content .join-button button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .main-content .join-button button:hover {
+            background-color: #0056b3;
+        }
+        .join-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .join-modal .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+        }
+        .join-modal .modal-content h2 {
+            margin-top: 0;
+        }
+        .join-modal .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .join-modal .modal-content button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .join-modal .modal-content button:hover {
+            background-color: #0056b3;
+        }
+  </style>
+ </head>
+ <body>
+  <div class="sidebar">
+   <div class="logo">
+    <img alt="Logo" height="40" src="https://storage.googleapis.com/a1aa/image/HIC2p682eOQUVyVUKjVEjQFC2iiZwGZbx0efVDL6IqDAjCEoA.jpg" width="40"/>
+    <span>
+     Vision Build
+    </span>
+   </div>
+   <ul class="menu">
+    <li>
+     <a href="#">
+      <i class="fas fa-home">
+      </i>
+      Home
+     </a>
+    </li>
+    <li>
+     <a href="#">
+      <i class="fas fa-folder">
+      </i>
+      Projects
+     </a>
+    </li>
+    <li>
+     <a href="#">
+      <i class="fas fa-users">
+      </i>
+      Collaboration
+     </a>
+    </li>
+   </ul>
+   <div class="profile">
+    <img alt="Profile Picture" height="40" src="https://storage.googleapis.com/a1aa/image/mgfEVM8xtfjJ2Es3xzmbrofU2JgZg1wqAf32G030se7JNKQgC.jpg" width="40"/>
+    <div>
+     <div class="name">
+      Amanda
+     </div>
+     <div class="view-profile">
+      View profile
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="main-content">
+   <div class="header">
+    <div class="search-bar">
+     <input placeholder="Search ..." type="text"/>
+     <i class="fas fa-search">
+     </i>
+    </div>
+    <div class="filter">
+     <select>
+      <option>
+       Date
+      </option>
+      <option>
+       Name
+      </option>
+     </select>
+     <i class="fas fa-filter">
+     </i>
+    </div>
+    <div class="notification">
+     <i class="fas fa-bell">
+     </i>
+    </div>
+   </div>
+   <div class="title">
+    Collaboration Platform
+   </div>
+   <div class="cards">
+    <div class="card">
+     <img alt="Living Room Renovation" height="200" src="https://storage.googleapis.com/a1aa/image/OdOXKz4VbdrUAtQ2NPwrEB0eXOafVlyiYlabUH3sAf6cjCEoA.jpg" width="300"/>
+     <div class="title">
+      Living Room Renovation
+     </div>
+     <div class="date">
+      Last edited: Oct 3, 2023
+     </div>
+     <div class="team">
+      <img alt="John" height="30" src="https://storage.googleapis.com/a1aa/image/Vw71edrBck20cytTzoxOgJEngyQRQRUXupuCN6JhDPZzoABKA.jpg" width="30"/>
+      <div class="name">
+       John
+      </div>
+      <img alt="Emma" height="30" src="https://storage.googleapis.com/a1aa/image/ymRCUPUDXE7bKVRITfKy8JGUapKl6hbGIZbeUCyoPn8tRBCUA.jpg" width="30"/>
+      <div class="name">
+       Emma
+      </div>
+      <img alt="Alex" height="30" src="https://storage.googleapis.com/a1aa/image/5zO7EOaPrFaYAhb82l9wVdHsUlyCoeY45ZGIMcUiFAF4oABKA.jpg" width="30"/>
+      <div class="name">
+       Alex
+      </div>
+     </div>
+    </div>
+    <div class="card">
+     <img alt="Kitchen Renovations" height="200" src="https://storage.googleapis.com/a1aa/image/qzWEdvGsQGowGdeJHfudoanee93mhOsSitBB6BFemmL6MKQgC.jpg" width="300"/>
+     <div class="title">
+      Kitchen Renovations
+     </div>
+     <div class="date">
+      Last edited: Sep 28, 2023
+     </div>
+     <div class="team">
+      <img alt="Sarah" height="30" src="https://storage.googleapis.com/a1aa/image/Ue3Q1UtTsO13CqXBzb7fc4KZ2ng8k0i2jXCbOtkmfOmFjCEoA.jpg" width="30"/>
+      <div class="name">
+       Sarah
+      </div>
+      <img alt="Mike" height="30" src="https://storage.googleapis.com/a1aa/image/hAKc3xfVz8WBZykO2Petq37UvofhBkQf5jR4eXWPTB2vOKQgC.jpg" width="30"/>
+      <div class="name">
+       Mike
+      </div>
+      <img alt="Lucy" height="30" src="https://storage.googleapis.com/a1aa/image/Alcm59ZISua7GpH5n3QZjXgQnQf8AH1jrwfo38t6XULrRBCUA.jpg" width="30"/>
+      <div class="name">
+       Lucy
+      </div>
+     </div>
+    </div>
+    <div class="card">
+     <img alt="Drawing Room Renovation" height="200" src="https://storage.googleapis.com/a1aa/image/OStafEPlLWRjP6jxTv7IsxuZOEEpghsu0DeHf3qpXR2ujCEoA.jpg" width="300"/>
+     <div class="title">
+      Drawing Room Renovation
+     </div>
+     <div class="date">
+      Last edited: Oct 5, 2023
+     </div>
+     <div class="team">
+      <img alt="David" height="30" src="https://storage.googleapis.com/a1aa/image/6C3K1s5SflzmBqaQY52izXNzmraFICRXhH61WKvrdSK6oABKA.jpg" width="30"/>
+      <div class="name">
+       David
+      </div>
+      <img alt="Rachel" height="30" src="https://storage.googleapis.com/a1aa/image/dTey9pIVxPzTeUfBBm0GnFfwRZqqqXG3j4mBEcfVZ5JYMKQgC.jpg" width="30"/>
+      <div class="name">
+       Rachel
+      </div>
+      <img alt="Ben" height="30" src="https://storage.googleapis.com/a1aa/image/QMYInR5mlLJGJpzl59ejvkEkZnfN2f7PKW7JMLiLV3dljCEoA.jpg" width="30"/>
+      <div class="name">
+       Ben
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="join-button">
+    <button onclick="document.getElementById('joinModal').style.display='flex'">
+     Join Project
+    </button>
+   </div>
+  </div>
+  <div class="join-modal" id="joinModal">
+   <div class="modal-content">
+    <h2>
+     Join Project
+    </h2>
+    <input placeholder="Enter project link" type="text"/>
+    <input placeholder="Enter project code" type="text"/>
+    <button onclick="document.getElementById('joinModal').style.display='none'">
+     Join
+    </button>
+   </div>
+  </div>
+  <script>
+   document.addEventListener('click', function(event) {
+            var modal = document.getElementById('joinModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+  </script>
+ </body>
+</html>
